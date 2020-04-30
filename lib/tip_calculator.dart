@@ -25,7 +25,7 @@ class _TipCalculatorState extends State<TipCalculator> {
   calculateTotalPerPerson(double billAmount, int splitBy, int tipPercentage) {
     double totalPerPerson = (calculateTotalTip(billAmount, tipPercentage) + billAmount) / splitBy;
     // .toStringAsFixed(2) -> exibe o valor com 2 casas decimais.
-    return totalPerPerson.toStringAsFixed(2);
+    return totalPerPerson;
   }
 
   calculateTotalTip(double billAmount, int tipPercentage) {
@@ -35,7 +35,7 @@ class _TipCalculatorState extends State<TipCalculator> {
     } else {
       totalTip = billAmount * (tipPercentage / 100);
     }
-    return totalTip.toStringAsFixed(2);
+    return totalTip;
   }
 
   @override
@@ -77,7 +77,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                     Padding(
                       padding: EdgeInsets.all(12),
                       child: Text(
-                        '\$${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage)}',
+                        '\$${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage).toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
