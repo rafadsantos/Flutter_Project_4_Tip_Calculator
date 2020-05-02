@@ -10,6 +10,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project4_tip_calculator/hexcolor.dart';
+import 'package:intl/intl.dart';
 
 class TipCalculator extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _TipCalculatorState extends State<TipCalculator> {
   int _personCounter = 1;
   double _billAmount = 0.0;
   Color _purple = HexColor('#6908D6');
+  final numFormatado = NumberFormat.currency(locale: "pt_BR", symbol: "R\$", name: "Real");
 
   calculateTotalPerPerson(double billAmount, int splitBy, int tipPercentage) {
     double totalPerPerson = (calculateTotalTip(billAmount, tipPercentage) + billAmount) / splitBy;
@@ -77,7 +79,9 @@ class _TipCalculatorState extends State<TipCalculator> {
                     Padding(
                       padding: EdgeInsets.all(12),
                       child: Text(
-                        '\$${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage).toStringAsFixed(2)}',
+                        //'\$${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage).toStringAsFixed(2)}',
+                        // TODO: testar formatação abaixo (Resultado deverá ser R$000.000,00)
+                        '\$${numFormatado.format(calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage))}',
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
